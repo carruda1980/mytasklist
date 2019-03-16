@@ -16,7 +16,7 @@ class Tasks(models.Model):
         criado em: 03/2019
     """
     titulo = models.CharField(max_length=30, unique=True)
-    description = models.CharField(max_length=100)
+    descricao = models.CharField(max_length=100)
     status = models.CharField(
         max_length=2,
         choices=STATUS_CHOICES

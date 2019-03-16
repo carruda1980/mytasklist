@@ -11,7 +11,7 @@
             {% csrf_token %}
             <div class="form-group">
             <label for="email">Email:</label>
-            <input type="email" class="form-control" id="email" placeholder="Digite seu email" name="email">
+            <input type="email" class="form-control" id="email" placeholder="Digite seu email" name="email" required>
             </div>
             {% if erros %} 
                 <div class="alert alert-danger">
