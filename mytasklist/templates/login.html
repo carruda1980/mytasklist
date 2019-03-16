@@ -7,14 +7,18 @@
 {% block content %}
     <div class="container">
         <h2>Login</h2>
-        <form action="">
+        <form action="" method="POST">
+            {% csrf_token %}
             <div class="form-group">
             <label for="email">Email:</label>
             <input type="email" class="form-control" id="email" placeholder="Digite seu email" name="email">
             </div>
-            <div class="form-group">
-            <label for="senha">Senha:</label>
-            <input type="password" class="form-control" id="senha" placeholder="Digite senha" name="senha">
+            <div class="alert alert-danger">
+                <strong>
+                {% if erros %} 
+                {{erros}} 
+                {% endif %} 
+                </strong>
             </div>
             <button type="submit" class="btn btn-default">Logar</button>
         </form>
