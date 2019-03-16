@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+# Local
+from .models import Tasks
+
+# Registrando os Models
+admin.site.register(Tasks)
