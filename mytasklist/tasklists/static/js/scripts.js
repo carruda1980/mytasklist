@@ -1,46 +1,29 @@
-// $(function() {
-//     //hang on event of form with id=myform
-//     $("#createtask").submit(function(e) {
-
-//         //prevent Default functionality
-//         e.preventDefault();
-
-//         //get the action-url of the form
-//         var actionurl = e.currentTarget.action;
-
-//         //do your own request an handle the results
-//         $.ajax({
-//                 url: actionurl,
-//                 type: 'post',
-//                 dataType: 'application/json',
-//                 //data: $("#createtask").serialize(),
-//                 // success: function(data) {
-//                 //     ... do something with the data...
-//                 // }
-//         });
-//         console.log(data);
-
-//     });
-
-// });
-
-
-// function CreateTask(){
-//     var url = "teste";
-//      var titulo = $("#titulo").val();
-//     var descricao = $("#descricao").val();
-//     $.ajax({
-//         url: url,
-//         type: "POST",
-//         data: {
-//             'titulo': titulo,
-//             'descricao': descricao,
-//             'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
-//         },
-//         beforeSend: function(){
-//             $('ajax-loader').show();
-//         }
-//     });
-
-//     console.log($('input[name=csrfmiddlewaretorken]').val());
-// }
+$('#inserir').click(function() {
+    var url = "/create/";
+    var titulo = $("#titulo").val();
+    var descricao = $("#descricao").val();
+    if(titulo=="" || descricao==""){
+        alert("Os campos titulo e descrição são obrigatórios, favor preenche-los!");
+    }else{
+        $.ajax({
+            url: url,
+            type: "POST",
+            dataType: "text json",
+            data: {
+                'titulo': titulo,
+                'descricao': descricao,
+                'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+            },
+            success: function(data){
+                console.log(data);
+                if(data.sucesso == 1){
+                    $('#novaTarefa').modal('hide');
+                    alert("Registro inserido com sucesso!");
+                }else{
+                    $('#novaTarefa').modal('hide');
+                    alert("A tarefa não pode ser inserida, favor entrar em contato com o Suporte!");
+                }
+            }
+        });
+    }
+});
