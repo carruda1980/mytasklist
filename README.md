@@ -12,6 +12,4 @@ Sistema simples para criação de tarefas cotidianas.
 
 - HTML
 
-- CSS
-
 - JavaScript
