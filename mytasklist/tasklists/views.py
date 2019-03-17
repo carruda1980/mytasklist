@@ -45,8 +45,13 @@ class Dashboard(Login, View):
         criado em: 03/2019
     """
     def get(self, request, *args, **kwargs):
+        userid = request.user.id
         tasks = TasksForm()
-        return render(request, 'dashboard.html',  {'tasks': tasks})
+        get_task = Tasks.objects.filter(criado_por=userid)
+        return render(request, 'dashboard.html',  {
+            'tasks': tasks,
+            'get_tasks': get_task
+            })
 
 class CreateTask(Login, View):
     """
@@ -57,7 +62,6 @@ class CreateTask(Login, View):
         titulo = request.POST['titulo']
         descricao = request.POST['descricao']
         criado_por = request.user
-
         try:
             task = Tasks.objects.create(
                 titulo=titulo,

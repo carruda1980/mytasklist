@@ -21,6 +21,29 @@
             </ul>
         </div>
     </nav>
+    <!-- Tabela -->
+    <table class="table">
+        <thead>
+            <tr>
+            <th scope="col">#</th>
+            <th scope="col">Título tarefa</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in get_tasks %}
+                <tr>
+                <th scope="row">{{ task.id }}</th>
+                <td>{{ task.titulo }}</td>
+                <td>{{ task.descricao }}</td>
+                <td>{{ task.get_status_display }}</td>
+                <td><a href="#"><span class="glyphicon glyphicon-remove"></span></a></td>
+                <td><a href="#"><span class="glyphicon glyphicon-pencil"></span></a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
     <!-- Modal -->
     <div id="novaTarefa" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -48,6 +71,6 @@
             </div>
         </div>
     </div>
-<script src="/static/js/scripts.js">
-</script>
+    <script src="/static/js/scripts.js">
+    </script>
 {% endblock %}
