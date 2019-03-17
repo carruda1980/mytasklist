@@ -25,7 +25,8 @@ class Tasks(models.Model):
     criado_por = models.ForeignKey(User, on_delete=models.CASCADE, related_name='users')
     atualizado_em = models.DateTimeField(null=True)
     atualizado_por = models.ForeignKey(User, null=True, on_delete=models.CASCADE, related_name='+')
-    excluido_em = models.DateField(null=True)
+    excluido = models.BooleanField(default=False)
+    excluido_em = models.DateField(auto_now_add=True, null=True)
 
     def __str__(self):
         return self.titulo

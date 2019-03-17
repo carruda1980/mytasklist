@@ -31,20 +31,20 @@
             <th scope="col">Status</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="listagem">
             {% for task in get_tasks %}
                 <tr>
                 <th scope="row">{{ task.id }}</th>
                 <td>{{ task.titulo }}</td>
                 <td>{{ task.descricao }}</td>
                 <td>{{ task.get_status_display }}</td>
-                <td><a href="#"><span class="glyphicon glyphicon-remove"></span></a></td>
-                <td><a href="#"><span class="glyphicon glyphicon-pencil"></span></a></td>
+                <td><a href="#" id="remover" rel="{{ task.id }}"><span class="glyphicon glyphicon-remove"></span></a></td>
+                <td><a href="#" id="linkeditar" rel="{{ task.id }}"><span class="glyphicon glyphicon-pencil"></span></a></td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
-    <!-- Modal -->
+    <!-- Modal nova tarefa -->
     <div id="novaTarefa" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <!-- Conteúdo-->
@@ -64,6 +64,35 @@
                     <input type="descricao" class="form-control" id="descricao" placeholder="Digite uma descricao" name="descricao" required>
                 </div>
                 <button type="submit" id="inserir" class="btn btn-primary btn-block">Inserir</button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal editar tarefa -->
+    <div id="editarTarefa" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Conteúdo-->
+            <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Editar tarefa</h4>
+            </div>
+            <div class="modal-body">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="titulo">Título:</label>
+                    <input type="text" class="form-control" id="edittitulo" placeholder="Digite um titulo" name="titulo" required>
+                </div>
+                <div class="form-group">
+                    <label for="descricao">Descrição:</label>
+                    <input type="text" class="form-control" id="editdescricao" placeholder="Digite uma descricao" name="descricao" required>
+                </div>
+                <input type="hidden" name="pk" id="edittarefaid" value="">
+                <button type="submit" id="editar" class="btn btn-primary btn-block">Editar</button>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
