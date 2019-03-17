@@ -31,6 +31,7 @@ class Login(View):
             return TemplateResponse(request, 'login.html',{
                 "erros": "Você não possui uma conta cadastrada"
             })
+
 # Logout
 class Logout(Login, View):
     """
@@ -39,6 +40,7 @@ class Logout(Login, View):
     """
     def get(self, request, *args, **kwargs):
         return redirect('/login/')
+
 # Renderiza o template do dashboard e exibe lista de tarefas
 class Dashboard(Login, View):
     """
@@ -53,6 +55,7 @@ class Dashboard(Login, View):
             'tasks': tasks,
             'get_tasks': get_task
             })
+
 # Cria uma nova tarefa
 class CreateTask(Login, View):
     """
@@ -77,6 +80,7 @@ class CreateTask(Login, View):
             return JsonResponse({
                 "sucesso": 0
             })
+
 # Delata uma tarefa
 class DeleteTask(Login, View):
     """
@@ -100,6 +104,7 @@ class DeleteTask(Login, View):
             return JsonResponse({
                 "sucesso": 0
             })
+
 # Exite uma tarefa para ser editada
 class GetEditTask(Login, View):
     """
@@ -122,6 +127,7 @@ class GetEditTask(Login, View):
             return JsonResponse({
                 "sucesso": 0
             })
+            
 # Edita uma tarefa
 class EditTask(Login, View):
     """

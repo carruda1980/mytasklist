@@ -19,6 +19,7 @@ $('#inserir').click(function() {
                 if(data.sucesso == 1){
                     $('#novaTarefa').modal('hide');
                     alert("Registro inserido com sucesso!");
+                    window.location.reload();
                 }else{
                     $('#novaTarefa').modal('hide');
                     alert("A tarefa não pode ser inserida, favor entrar em contato com o Suporte!");
@@ -42,6 +43,7 @@ $('#remover').click(function() {
         success: function(data){
             if(data.sucesso == 1){
                 alert("Registro removido com sucesso!");
+                window.location.reload();
             }else{
                 alert("A tarefa não pode ser removida, favor entrar em contato com o Suporte!");
             }
@@ -90,6 +92,7 @@ $('#editar').click(function() {
             if(data.sucesso==1){
                 alert("Registro editado com sucesso!");
                 $('#editarTarefa').modal('hide');
+                window.location.reload();
             }else{
                 $('#editarTarefa').modal('hide');
                 alert("A tarefa não pode ser atualizada, favor entrar em contato com o Suporte!");
