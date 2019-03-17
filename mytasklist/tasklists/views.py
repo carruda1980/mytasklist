@@ -1,3 +1,4 @@
+# Importando as bibliotecas
 from django.shortcuts import render, redirect
 
 from django.http import JsonResponse
@@ -12,6 +13,7 @@ from .forms import TasksForm
 
 from django.contrib.auth.models import User
 
+# Realiza o login do usuário
 class Login(View):
     """
         autor: Carlos Arruda
@@ -23,14 +25,13 @@ class Login(View):
     def post(self, request, *args, **kwargs):
         email = request.POST['email']
         validar = User.objects.filter(email=email)
-        
         if validar:
             return redirect('/dashboard/')
         else:
             return TemplateResponse(request, 'login.html',{
                 "erros": "Você não possui uma conta cadastrada"
             })
-
+# Logout
 class Logout(Login, View):
     """
         autor: Carlos Arruda
@@ -38,7 +39,7 @@ class Logout(Login, View):
     """
     def get(self, request, *args, **kwargs):
         return redirect('/login/')
-
+# Renderiza o template do dashboard e exibe lista de tarefas
 class Dashboard(Login, View):
     """
         autor: Carlos Arruda
@@ -52,7 +53,7 @@ class Dashboard(Login, View):
             'tasks': tasks,
             'get_tasks': get_task
             })
-
+# Cria uma nova tarefa
 class CreateTask(Login, View):
     """
         autor: Carlos Arruda
@@ -76,7 +77,7 @@ class CreateTask(Login, View):
             return JsonResponse({
                 "sucesso": 0
             })
-
+# Delata uma tarefa
 class DeleteTask(Login, View):
     """
         autor: Carlos Arruda
@@ -99,7 +100,7 @@ class DeleteTask(Login, View):
             return JsonResponse({
                 "sucesso": 0
             })
-
+# Exite uma tarefa para ser editada
 class GetEditTask(Login, View):
     """
         autor: Carlos Arruda
@@ -121,7 +122,7 @@ class GetEditTask(Login, View):
             return JsonResponse({
                 "sucesso": 0
             })
-import ipdb
+# Edita uma tarefa
 class EditTask(Login, View):
     """
         autor: Carlos Arruda
@@ -131,15 +132,12 @@ class EditTask(Login, View):
         tarefa_id = request.POST['edittarefaid']
         titulo = request.POST['edittitulo']
         descricao = request.POST['editdescricao']
-        atualizado_por = request.user.id
-        ipdb.set_trace()
         try:
             task = Tasks.objects.get(
                 id=tarefa_id
             )
             task.titulo = titulo
             task.descricao = descricao
-            # task.atualizado_por = atualizado_por
             task.save()
             return JsonResponse({
                 "sucesso": 1
